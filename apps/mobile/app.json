@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "name": "FG Dock Staff",
+    "slug": "fg-dock-staff",
+    "scheme": "fgdock",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F3F5F8"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "th.co.goalong.fgdock",
+      "infoPlist": {
+        "NSCameraUsageDescription": "ใช้กล้องเพื่อสแกนบาร์โค้ดกล่องและตำแหน่งในคลัง"
+      }
+    },
+    "android": {
+      "package": "th.co.goalong.fgdock",
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F2FD",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "permissions": ["android.permission.CAMERA", "android.permission.VIBRATE"],
+      "softwareKeyboardLayoutMode": "pan",
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "ใช้กล้องเพื่อสแกนบาร์โค้ดกล่องและตำแหน่งในคลัง",
+          "recordAudioAndroid": false
+        }
+      ]
+    ]
+  }
+}

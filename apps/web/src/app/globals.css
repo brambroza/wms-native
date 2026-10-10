@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+/* Design tokens — docs/08-ux-v3-clean-saas.md */
+@theme {
+  --font-sans: "Anuphan", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ground: #f3f5f8;
+  --color-card: #ffffff;
+  --color-line: #e6eaf0;
+  --color-divider: #eef1f5;
+  --color-ink: #1b2430;
+  --color-secondary: #3a4553;
+  --color-muted: #6b7685;
+
+  --color-primary: #1c74c4;
+  --color-primary-hover: #1663a8;
+  --color-primary-soft: #e6f2fd;
+  --color-link: #1567b4;
+  --color-data: #4da3f0;
+
+  --color-success: #1c7c47;
+  --color-success-soft: #e7f7ee;
+  --color-success-data: #3dbe7a;
+  --color-warn: #8a5a00;
+  --color-warn-soft: #fff4de;
+  --color-warn-data: #f2b84b;
+  --color-danger: #a8322a;
+  --color-danger-soft: #fdecec;
+  --color-danger-data: #e5675e;
+  --color-ai: #5b44b8;
+  --color-ai-soft: #f0ecfd;
+  --color-neutral-soft: #f1f3f6;
+
+  --radius-card: 14px;
+}
+
+html {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-ground);
+  font-variant-numeric: tabular-nums;
+}
+
+body {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+@keyframes flash-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-flash { animation: flash-in 160ms ease-out; }

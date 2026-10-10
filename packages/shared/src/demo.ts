@@ -33,6 +33,8 @@ const PACK_CODES = {
 } as const;
 
 const SIZES = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
+/** multiplies the plan sizes below (per container) so containers reach realistic fill levels */
+const SCALE: Record<string, number> = { 'ct-1': 6.0, 'ct-2': 9.3, 'ct-3': 14.8, 'ct-4': 14.6, 'ct-5': 28.5, '': 6 };
 
 export interface DemoData {
   warehouses: Warehouse[];
@@ -71,7 +73,7 @@ export function demoData(): DemoData {
           x: (bay - 1) * 1.3,
           y: ri * 2.6 + (ri >= 2 ? 0.6 : 0),
           z: (level - 1) * 1.1,
-          capacityCartons: 48,
+          capacityCartons: 160,
         });
       }
     }
@@ -124,7 +126,8 @@ export function demoData(): DemoData {
   let serial = 7100001;
   const rackLocs = locations.filter((l) => l.kind === 'RACK' && l.warehouseId === 'wh-c');
 
-  defs.forEach(([poNo, poLine, desc, fac, containerId, count, style, status, source], pi) => {
+  defs.forEach(([poNo, poLine, desc, fac, containerId, baseCount, style, status, source], pi) => {
+    const count = Math.round(baseCount * SCALE[containerId]);
     const id = `pp-${pi + 1}`;
     const container = containers.find((c) => c.id === containerId);
     const shipmentId = container?.shipmentId ?? (pi % 2 ? 'sh-3' : 'sh-2');
@@ -136,7 +139,7 @@ export function demoData(): DemoData {
       const size = SIZES[r % SIZES.length];
       const packCode = (['A6', 'A1', 'A6', 'A7', 'A7', 'A6'] as const)[r % 6];
       const dims = PACK_CODES[packCode];
-      const n = Math.min(remaining, 8 + Math.floor(rand() * 18));
+      const n = Math.min(remaining, 40 + Math.floor(rand() * 120));
       const qtyPer = packCode === 'A1' ? 16 : packCode === 'A6' ? 10 : 6;
       const gross = Math.round((dims.l * dims.w * dims.h) / 9000 * 100) / 100;
       planRanges.push({

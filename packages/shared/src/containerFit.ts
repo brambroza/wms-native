@@ -82,11 +82,23 @@ export function fitContainer(items: FitItem[], type: ContainerType['code'] = '40
 
   const placements: Placement[] = [];
   const overflow: { key: string; count: number }[] = [];
-  let x = 0;
   let seq = 0;
   let weightKg = 0;
   let cartonVolume = 0;
   let total = 0;
+
+  // The wall currently being filled. Columns run across the container width; each column
+  // stacks cartons upwards. Any carton whose footprint fits the wall's column (depth and width)
+  // keeps filling it, so pack codes sharing a footprint (e.g. A6 / A7) don't waste a new wall.
+  let wall: { x: number; depth: number; across: number; heights: number[]; counts: number[] } | null = null;
+  let x = 0; // where the next wall starts
+
+  const openWall = (o: Orientation) => {
+    if (wall) x = wall.x + wall.depth;
+    if (x + o.depth > L + 1e-6) return false;
+    wall = { x, depth: o.depth, across: o.across, heights: new Array(o.cols).fill(0), counts: new Array(o.cols).fill(0) };
+    return true;
+  };
 
   for (const item of items) {
     total += item.count;
@@ -96,35 +108,51 @@ export function fitContainer(items: FitItem[], type: ContainerType['code'] = '40
       overflow.push({ key: item.key, count: remaining });
       continue;
     }
-    while (remaining > 0) {
-      if (x + o.depth > L + 1e-6) break;
-      const inWall = Math.min(remaining, o.perWall);
-      for (let i = 0; i < inWall; i++) {
-        // fill bottom level first, left to right, then go up
-        const level = Math.floor(i / o.cols);
-        const col = i % o.cols;
-        if (weightKg + item.grossKg > c.maxPayloadKg) break;
-        seq += 1;
-        weightKg += item.grossKg;
-        cartonVolume += item.lengthCm * item.widthCm * item.heightCm;
-        placements.push({
-          seq,
-          key: item.key,
-          group: item.group,
-          x,
-          y: col * o.across,
-          z: level * item.heightCm,
-          l: o.depth,
-          w: o.across,
-          h: item.heightCm,
-        });
-        remaining -= 1;
-      }
-      x += o.depth;
+    const fitsWall = () => {
+      const w = wall as { depth: number; across: number } | null;
+      if (!w) return false;
+      // same column width either way round; depth must not exceed the wall
+      if (o.across <= w.across + 0.5 && o.depth <= w.depth + 0.5) return true;
+      return o.depth <= w.across + 0.5 && o.across <= w.depth + 0.5;
+    };
+    const maxStack = item.maxStack ?? Number.POSITIVE_INFINITY;
+    let full = false;
+    while (remaining > 0 && !full) {
       if (weightKg + item.grossKg > c.maxPayloadKg) break;
+      if (!fitsWall() && !openWall(o)) break;
+      const w = wall as unknown as { x: number; depth: number; across: number; heights: number[]; counts: number[] };
+      // lowest column that still has room — fills level by level
+      let col = -1;
+      for (let i = 0; i < w.heights.length; i++) {
+        if (w.heights[i] + item.heightCm <= H + 1e-6 && w.counts[i] < maxStack && (col < 0 || w.heights[i] < w.heights[col] - 0.01)) col = i;
+      }
+      if (col < 0) {
+        if (!openWall(o)) full = true;
+        continue;
+      }
+      const sameWay = o.across <= w.across + 0.5;
+      seq += 1;
+      weightKg += item.grossKg;
+      cartonVolume += item.lengthCm * item.widthCm * item.heightCm;
+      placements.push({
+        seq,
+        key: item.key,
+        group: item.group,
+        x: w.x,
+        y: col * w.across,
+        z: w.heights[col],
+        l: sameWay ? o.depth : o.across,
+        w: sameWay ? o.across : o.depth,
+        h: item.heightCm,
+      });
+      w.heights[col] += item.heightCm;
+      w.counts[col] += 1;
+      remaining -= 1;
     }
     if (remaining > 0) overflow.push({ key: item.key, count: remaining });
   }
+  const finalWall = wall as { x: number; depth: number } | null;
+  if (finalWall) x = finalWall.x + finalWall.depth;
 
   const containerVolume = L * W * H;
   return {

@@ -175,7 +175,13 @@ export function parsePackingPlanText(text: string): ParsedPlan | null {
   // Right-hand box: a short code line (e.g. "NO CAB") and a destination line ("CITY, ST,COUNTRY").
   const lines = text.split(/\r?\n/);
   const destLine = lines.map((l) => l.trim()).find((l) => /^[A-Z][A-Z .'-]+,\s*[A-Z]{2}\s*,\s*[A-Z ]+$/.test(l));
-  const shipTo = text.match(/\s{6,}([A-Z]{2,}(?: [A-Z]{2,})?)\s*\n\s*PO Number/);
+  // Ship-to code: a short all-caps line (1–3 words) inside the PO SUMMARY block that is not a column header.
+  const summaryBlock = text.slice(text.indexOf('PO SUMMARY') + 10, text.indexOf('PACKING DETAIL') > 0 ? text.indexOf('PACKING DETAIL') : undefined);
+  const shipToLine = summaryBlock
+    .split(/\r?\n/)
+    .map((l) => l.trim())
+    .find((l) => /^[A-Z]{2,}(?: [A-Z]{2,}){0,2}$/.test(l) && !/^(PO|KG|CBM|TOTALS?|UNIT)\b/.test(l));
+  const shipTo = shipToLine ? [shipToLine, shipToLine] : null;
 
   const ranges: PlanCartonRange[] = [];
   for (const line of lines) {

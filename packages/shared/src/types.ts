@@ -80,6 +80,10 @@ export interface Carton {
   status: CartonStatus;
   warehouseId: string;
   locationId: string | null;
+  /** load order inside the container (1 = first in, deepest) */
+  loadSeq?: number | null;
+  /** placement hint for loaders, e.g. "แถว 7 · ซ้าย · ล่าง" */
+  loadLabel?: string | null;
 }
 
 export interface Shipment {
