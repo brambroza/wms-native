@@ -8,6 +8,7 @@
 - `docs/03-architecture.md` — stack, monorepo, data model, API, container-fit
 - `docs/04-plan.md` — phase/sprint
 - `docs/05-recommendations.md`
+- `docs/06-packing-plan-format.md` — **รูปแบบ Packing Plan จริง: หน่วยหลักคือกล่อง (carton serial) ไม่ใช่พาเลท — มีผลเหนือ 01/03 เมื่อขัดกัน**
 
 ## Stack
 React + TS (web) · React Native/Expo (mobile staff) · .NET 8 Web API + SignalR + Hangfire · MSSQL · three.js via react-three-fiber · Docker + Jenkins

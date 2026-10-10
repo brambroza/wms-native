@@ -23,8 +23,9 @@
 
 ## Phase 2 — Packing Plan + คำนวณตู้ + หยิบ (สัปดาห์ 7–10)
 
-- W4 สร้างจาก ATP, W5 Import (Mercury template ก่อน)
-- `container-fit` v1 (พาเลท) + W6 แสดงผล 3D
+- W5 Import Packing Plan ตามรูปแบบจริง (`06-packing-plan-format.md`) + ตรวจ control totals + หากล่อง serial ในคลัง, W4 สร้างเอง (กรณีไม่มีไฟล์)
+- Shipment/Container grouping: รวมหลายแผน (PO line) เข้าตู้เดียว
+- `container-fit` v1 ระดับกล่อง (layer-building ตาม Pack Code) + W6 แสดงผล 3D
 - W7 อนุมัติ + version/diff, Export ไฟล์ส่ง vendor
 - Allocation + M5 Pick + staging lane, mode 1 ก่อน แล้ว mode 2/3
 - **Demo**: แผนจริง 1 ตู้ — คำนวณเต็มตู้ ตรงกับที่โหลดจริง ±5%

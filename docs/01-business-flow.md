@@ -1,5 +1,7 @@
 # 01 — Business Flow: WMS FG ส่งออก (Export FG)
 
+> ⚠️ อัปเดต: ตัวอย่าง Packing Plan จริงระบุ **กล่องราย serial** และ 1 แผน = 1 PO line — ดู `06-packing-plan-format.md` ที่ใดเขียนว่า "พาเลท/LPN" ให้อ่านเป็น "กล่อง (carton serial)" เป็นหลัก โดยพาเลทเป็นภาชนะเสริมในคลัง
+
 > ขอบเขต: งาน FG (Finished Goods) ตั้งแต่รับเข้าคลัง → เก็บ → วาง Packing Plan → หยิบ → โหลดเข้าตู้ container → ปิดตู้/ส่งออก
 > เจ้าของกระบวนการ: **Warehouse กลาง (WH-C)** เป็นผู้แจ้ง Packing Plan และควบคุมการโหลดทุกกรณี แม้ของจะมาจาก Warehouse สาขา (WH-B) ก็ตาม
 

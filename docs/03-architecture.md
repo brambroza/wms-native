@@ -35,6 +35,8 @@ wms-native/
 
 ## Data Model (หลัก)
 
+> ⚠️ ปรับตามตัวอย่างจริงใน `06-packing-plan-format.md`: เพิ่ม `Shipment` เหนือ `PackingPlan`, ใช้ `Carton` (serial) เป็นหน่วยหลักแทน `HandlingUnit`, เพิ่ม `PpCartonRange`, `CartonCode`; container-fit ระดับกล่องย้ายเข้า MVP
+
 ```mermaid
 erDiagram
   WAREHOUSE ||--o{ ZONE : has
