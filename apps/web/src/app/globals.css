@@ -2,7 +2,7 @@
 
 /* Design tokens — docs/08-ux-v3-clean-saas.md */
 @theme {
-  --font-sans: "Anuphan", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Kanit", ui-sans-serif, system-ui, sans-serif;
 
   --color-ground: #f3f5f8;
   --color-card: #ffffff;

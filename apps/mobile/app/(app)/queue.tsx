@@ -1,4 +1,5 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { Text } from '../../src/components/AppText';
 import { Button, Card } from '../../src/components/ui';
 import { useAuthed, useQueueSnapshot } from '../../src/lib/session';
 import { colors } from '../../src/theme';

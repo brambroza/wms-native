@@ -1,6 +1,7 @@
 import { Redirect } from 'expo-router';
 import { useState } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
+import { Text, TextInput } from '../src/components/AppText';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Card, Loading } from '../src/components/ui';
 import { useSession } from '../src/lib/session';

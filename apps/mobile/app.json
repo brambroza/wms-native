@@ -27,7 +27,10 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "permissions": ["android.permission.CAMERA", "android.permission.VIBRATE"],
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.VIBRATE"
+      ],
       "softwareKeyboardLayoutMode": "pan",
       "predictiveBackGestureEnabled": false
     },
@@ -43,7 +46,8 @@
           "cameraPermission": "ใช้กล้องเพื่อสแกนบาร์โค้ดกล่องและตำแหน่งในคลัง",
           "recordAudioAndroid": false
         }
-      ]
+      ],
+      "expo-font"
     ]
   }
 }

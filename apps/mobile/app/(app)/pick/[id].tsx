@@ -1,6 +1,7 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { useMemo, useState } from 'react';
-import { SectionList, StyleSheet, Text, View } from 'react-native';
+import { SectionList, StyleSheet, View } from 'react-native';
+import { Text } from '../../../src/components/AppText';
 import { ScanBanner } from '../../../src/components/ScanBanner';
 import { ScannerInput } from '../../../src/components/ScannerInput';
 import { Loading, ProgressBar } from '../../../src/components/ui';

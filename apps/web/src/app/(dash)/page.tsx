@@ -73,18 +73,15 @@ export default function DashboardPage() {
                   เปิดหน้าโหลด →
                 </Link>
               </div>
-              <div className="relative">
-                <TruckFill pct={pct(hero)} />
-                <div className="pointer-events-none absolute top-[22%] left-[37%] flex flex-col gap-0.5 text-white">
-                  <div className="flex items-baseline gap-2">
-                    <b className="text-[clamp(28px,4vw,46px)] leading-none font-semibold">{Math.round(pct(hero))}%</b>
-                    <span className="text-sm">โหลดแล้ว</span>
-                  </div>
-                  <span className="text-sm">
-                    {hero.loadedCartons} / {hero.plannedCartons} กล่อง · {(hero.loadedKg / 1000).toFixed(1)} t
-                  </span>
+              <TruckFill pct={pct(hero)}>
+                <div className="flex items-baseline gap-2">
+                  <b className="text-[clamp(28px,4vw,46px)] leading-none font-semibold">{Math.round(pct(hero))}%</b>
+                  <span className="text-sm">โหลดแล้ว</span>
                 </div>
-              </div>
+                <span className="text-sm">
+                  {hero.loadedCartons} / {hero.plannedCartons} กล่อง · {(hero.loadedKg / 1000).toFixed(1)} t
+                </span>
+              </TruckFill>
               <div className="flex flex-wrap gap-4 pt-1 text-[13px] text-muted">
                 <span>
                   คาดเสร็จ <b className="text-ink">{hero.etaDone ?? '-'}</b>

@@ -1,5 +1,6 @@
 import { useRouter, type Href } from 'expo-router';
-import { Pressable, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
+import { Text } from '../../src/components/AppText';
 import { ContainerCard } from '../../src/components/ContainerCard';
 import { Button } from '../../src/components/ui';
 import { useContainers } from '../../src/hooks/useContainers';

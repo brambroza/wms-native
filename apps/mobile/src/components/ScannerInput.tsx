@@ -1,7 +1,8 @@
 import { CameraView, useCameraPermissions, type BarcodeScanningResult } from 'expo-camera';
 import { useIsFocused } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Platform, Pressable, StyleSheet, View, type TextInput as RNTextInput } from 'react-native';
+import { Text, TextInput } from './AppText';
 import { colors, touch } from '../theme';
 
 /**
@@ -23,7 +24,7 @@ export function ScannerInput({
 }) {
   const screenFocused = useIsFocused();
   const active = screenFocused && !paused;
-  const wedgeRef = useRef<TextInput>(null);
+  const wedgeRef = useRef<RNTextInput>(null);
   const [wedgeText, setWedgeText] = useState('');
   const [manual, setManual] = useState('');
   const [manualFocused, setManualFocused] = useState(false);

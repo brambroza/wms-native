@@ -94,18 +94,15 @@ export default function LoadingDetailPage() {
               </div>
             </div>
             {view === 'side' ? (
-              <div className="relative">
-                <TruckFill pct={pct} />
-                <div className="pointer-events-none absolute top-[22%] left-[36%] flex flex-col gap-0.5 text-white">
-                  <div className="flex items-baseline gap-2">
-                    <b className="text-[clamp(28px,4vw,46px)] leading-none font-semibold">{Math.round(pct)}%</b>
-                    <span className="text-sm">โหลดแล้ว</span>
-                  </div>
-                  <span className="text-sm">
-                    {c.loadedCartons} / {c.plannedCartons} กล่อง · {(c.loadedKg / 1000).toFixed(1)} t
-                  </span>
+              <TruckFill pct={pct}>
+                <div className="flex items-baseline gap-2">
+                  <b className="text-[clamp(28px,4vw,46px)] leading-none font-semibold">{Math.round(pct)}%</b>
+                  <span className="text-sm">โหลดแล้ว</span>
                 </div>
-              </div>
+                <span className="text-sm">
+                  {c.loadedCartons} / {c.plannedCartons} กล่อง · {(c.loadedKg / 1000).toFixed(1)} t
+                </span>
+              </TruckFill>
             ) : (
               <div className="h-[420px] overflow-hidden rounded-xl border border-divider">
                 {plan && <Container3D steps={plan.steps} loadedSerials={loaded} nextSerial={next?.serial} type={c.type} />}

@@ -22,7 +22,7 @@
 | data blue (กราฟ, เติมตู้) | `#4DA3F0` |
 | success / warn / danger (pill bg · fg) | `#E7F7EE·#1C7C47` / `#FFF4DE·#8A5A00` / `#FDECEC·#A8322A` |
 | AI | `#F0ECFD·#5B44B8` |
-| font | Anuphan (ไทย+อังกฤษ), ตัวเลข tabular |
+| font | Kanit (ไทย+อังกฤษ, self-host ผ่าน @fontsource/kanit บนเว็บ และ @expo-google-fonts/kanit บนมือถือ), ตัวเลข tabular |
 
 ปุ่มหลักใช้ `#1C74C4` (ไม่ใช่ฟ้าสว่าง) เพื่อให้ตัวอักษรขาวผ่าน contrast
 

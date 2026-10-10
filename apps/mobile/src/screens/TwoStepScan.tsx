@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { Text } from '../components/AppText';
 import type { ScanAction } from '@wms/shared';
 import { ScanBanner } from '../components/ScanBanner';
 import { ScannerInput } from '../components/ScannerInput';

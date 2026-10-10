@@ -1,5 +1,6 @@
 import { CONTAINER_STATUS } from '@wms/shared';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
+import { Text } from './AppText';
 import type { StaffContainer } from '../lib/types';
 import { colors, radius } from '../theme';
 import { Pill, ProgressBar } from './ui';

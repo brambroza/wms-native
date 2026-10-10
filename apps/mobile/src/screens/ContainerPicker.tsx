@@ -1,5 +1,6 @@
 import { useRouter } from 'expo-router';
-import { RefreshControl, ScrollView, StyleSheet, Text } from 'react-native';
+import { RefreshControl, ScrollView, StyleSheet } from 'react-native';
+import { Text } from '../components/AppText';
 import type { ContainerStatus } from '@wms/shared';
 import { ContainerCard } from '../components/ContainerCard';
 import { useContainers } from '../hooks/useContainers';

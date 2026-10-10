@@ -1,5 +1,11 @@
 import type { Metadata, Viewport } from 'next';
 import { ApiProvider } from '@/lib/api/provider';
+// Kanit is self-hosted (Thai + Latin) so the staff PWA keeps its font offline
+import '@fontsource/kanit/300.css';
+import '@fontsource/kanit/400.css';
+import '@fontsource/kanit/500.css';
+import '@fontsource/kanit/600.css';
+import '@fontsource/kanit/700.css';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -19,12 +25,6 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="th">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&display=swap" rel="stylesheet" />
-      </head>
       <body className="min-h-screen bg-ground text-ink antialiased">
         <ApiProvider>{children}</ApiProvider>
       </body>

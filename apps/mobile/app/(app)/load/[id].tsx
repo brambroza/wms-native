@@ -1,6 +1,7 @@
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { Text } from '../../../src/components/AppText';
 import { ScanBanner } from '../../../src/components/ScanBanner';
 import { ScannerInput } from '../../../src/components/ScannerInput';
 import { SealDialog } from '../../../src/components/SealDialog';
