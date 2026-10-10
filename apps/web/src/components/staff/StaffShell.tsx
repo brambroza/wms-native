@@ -2,7 +2,7 @@
 
 import { ChevronLeft, CloudOff } from 'lucide-react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useSyncExternalStore } from 'react';
 import { useWms } from '@/lib/api/provider';
 import { cx } from '../ui';
 
@@ -30,20 +30,17 @@ export function StaffHeader({ title, sub, back, pending = 0 }: { title: string; 
   );
 }
 
+const subscribeOnline = (cb: () => void) => {
+  window.addEventListener('online', cb);
+  window.addEventListener('offline', cb);
+  return () => {
+    window.removeEventListener('online', cb);
+    window.removeEventListener('offline', cb);
+  };
+};
+
 export function useOnline() {
-  const [online, setOnline] = useState(true);
-  useEffect(() => {
-    setOnline(navigator.onLine);
-    const up = () => setOnline(true);
-    const down = () => setOnline(false);
-    window.addEventListener('online', up);
-    window.addEventListener('offline', down);
-    return () => {
-      window.removeEventListener('online', up);
-      window.removeEventListener('offline', down);
-    };
-  }, []);
-  return online;
+  return useSyncExternalStore(subscribeOnline, () => navigator.onLine, () => true);
 }
 
 export function Flash({ msg }: { msg: { ok: boolean; text: string; queued?: boolean } | null }) {

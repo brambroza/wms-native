@@ -25,9 +25,7 @@ const ApiContext = createContext<Ctx | null>(null);
 let demoSingleton: DemoApi | null = null;
 
 export function ApiProvider({ children }: { children: React.ReactNode }) {
-  const sbRef = useRef<SupabaseClient | null>(null);
-  if (supabaseConfigured && !sbRef.current) sbRef.current = createBrowserClient(SUPABASE_URL!, SUPABASE_ANON_KEY!);
-  const supabase = sbRef.current;
+  const [supabase] = useState<SupabaseClient | null>(() => (supabaseConfigured ? createBrowserClient(SUPABASE_URL!, SUPABASE_ANON_KEY!) : null));
 
   const [session, setSession] = useState<Session | null>(null);
   const [ready, setReady] = useState(!supabaseConfigured);
@@ -71,7 +69,9 @@ export function useLive<T>(load: (api: WmsApi) => Promise<T>, deps: unknown[], c
   const [error, setError] = useState<string | null>(null);
   const [tick, setTick] = useState(0);
   const loadRef = useRef(load);
-  loadRef.current = load;
+  useEffect(() => {
+    loadRef.current = load;
+  });
   const allowed = ready && (api.mode === 'demo' || session !== null);
 
   useEffect(() => {

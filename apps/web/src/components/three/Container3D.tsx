@@ -86,26 +86,8 @@ function Cartons({ steps, loaded, next }: { steps: LoadStep[]; loaded: Set<strin
   }, [steps, loaded, next]);
 
   useLayoutEffect(() => {
-    const m = new THREE.Matrix4();
-    const color = new THREE.Color();
-    const place = (mesh: THREE.InstancedMesh | null, list: LoadStep[], colorFor?: (s: LoadStep) => string) => {
-      if (!mesh) return;
-      list.forEach((s, i) => {
-        const gap = 0.006;
-        m.compose(
-          new THREE.Vector3((s.x + s.l / 2) / 100, (s.z + s.h / 2) / 100, (s.y + s.w / 2) / 100),
-          new THREE.Quaternion(),
-          new THREE.Vector3(s.l / 100 - gap, s.h / 100 - gap, s.w / 100 - gap),
-        );
-        mesh.setMatrixAt(i, m);
-        if (colorFor) mesh.setColorAt(i, color.set(colorFor(s)));
-      });
-      mesh.count = list.length;
-      mesh.instanceMatrix.needsUpdate = true;
-      if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
-    };
-    place(solid.current, solidSteps, (s) => GROUP_COLORS[groups.indexOf(s.group) % GROUP_COLORS.length]);
-    place(ghost.current, ghostSteps);
+    writeInstances(solid.current, solidSteps, (s) => GROUP_COLORS[groups.indexOf(s.group) % GROUP_COLORS.length]);
+    writeInstances(ghost.current, ghostSteps);
   }, [solidSteps, ghostSteps, groups]);
 
   const max = Math.max(steps.length, 1);
@@ -127,4 +109,24 @@ function Cartons({ steps, loaded, next }: { steps: LoadStep[]; loaded: Set<strin
       )}
     </group>
   );
+}
+
+/** Writes one instance per load step (cm → m) into an instanced mesh. */
+function writeInstances(mesh: THREE.InstancedMesh | null, list: LoadStep[], colorFor?: (s: LoadStep) => string) {
+  if (!mesh) return;
+  const m = new THREE.Matrix4();
+  const color = new THREE.Color();
+  const gap = 0.006;
+  list.forEach((s, i) => {
+    m.compose(
+      new THREE.Vector3((s.x + s.l / 2) / 100, (s.z + s.h / 2) / 100, (s.y + s.w / 2) / 100),
+      new THREE.Quaternion(),
+      new THREE.Vector3(s.l / 100 - gap, s.h / 100 - gap, s.w / 100 - gap),
+    );
+    mesh.setMatrixAt(i, m);
+    if (colorFor) mesh.setColorAt(i, color.set(colorFor(s)));
+  });
+  mesh.count = list.length;
+  mesh.instanceMatrix.needsUpdate = true;
+  if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
 }

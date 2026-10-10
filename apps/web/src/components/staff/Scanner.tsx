@@ -13,7 +13,9 @@ export function Scanner({ onScan, placeholder = 'สแกนหรือพิ�
   const [camera, setCamera] = useState(false);
   const [manual, setManual] = useState('');
   const cb = useRef(onScan);
-  cb.current = onScan;
+  useEffect(() => {
+    cb.current = onScan;
+  });
   const emitCode = useCallback((c: string) => cb.current(c), []);
 
   // keyboard-wedge capture (ignored while the user types in a field)

@@ -1,5 +1,9 @@
 # 04 — Development Plan
 
+## สถานะ (10 ต.ค. 2569)
+- ✅ โครงระบบ: monorepo, Supabase schema + RLS + RPC, web (dashboard, plans, import PDF/Excel/CSV, stock 2D/3D, loading + 3D load plan + realtime), staff PWA (หยิบ/โหลด/รับเข้า/วางของ + offline queue), native Expo app
+- ⏭️ ต่อไป: ทดสอบกับข้อมูลจริง + Supabase project จริง, หน้าจัดตู้ (assign plan → container), ใบโอนสาขา→กลาง, map รหัสโรงงานในหน้า settings, รายงาน, ปรับ container-fit ให้เต็มตู้ขึ้น (~75% → 85%+)
+
 สมมติทีม: 1 Senior Dev (full-stack) + 1 Dev + 1 UX/UI (part-time) + Claude Code agents, sprint ละ 2 สัปดาห์
 
 ## Phase 0 — Discovery (สัปดาห์ 1–2)  ⚠️ ห้ามข้าม

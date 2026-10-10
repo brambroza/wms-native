@@ -27,7 +27,9 @@ export function useScanQueue(api: WmsApi, onLateResult?: (ev: ScanEvent, r: Scan
   const [pending, setPending] = useState(0);
   const flushing = useRef(false);
   const lateRef = useRef(onLateResult);
-  lateRef.current = onLateResult;
+  useEffect(() => {
+    lateRef.current = onLateResult;
+  });
 
   const flush = useCallback(async () => {
     if (flushing.current) return;

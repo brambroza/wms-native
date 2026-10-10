@@ -1,5 +1,7 @@
 # 03 — Architecture & Data Model (จาก Senior Dev)
 
+> ⚠️ **Stack เปลี่ยนแล้ว (10 ต.ค. 2569):** ใช้ Next.js 16 + Tailwind (web + PWA), Expo (native handheld) และ Supabase แทน .NET / MSSQL / SignalR / Hangfire — ดู `README.md` ที่ root. ตารางด้านล่างเป็นแนวคิดเดิม; schema จริงอยู่ที่ `supabase/migrations/`
+
 ## Stack
 
 | ส่วน | เลือก | เหตุผล |
