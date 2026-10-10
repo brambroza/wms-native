@@ -1,0 +1,11 @@
+{
+  "name": "wms-native",
+  "private": true,
+  "workspaces": ["apps/web", "packages/*"],
+  "scripts": {
+    "dev": "npm run dev -w apps/web",
+    "build": "npm run build -w apps/web",
+    "test": "npm test -w packages/shared",
+    "typecheck": "npm run typecheck -w packages/shared && npm run typecheck -w apps/web"
+  }
+}
