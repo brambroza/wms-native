@@ -123,7 +123,7 @@ stateDiagram-v2
 
 ไปที่ ตู้ & โหลด แล้วเลือกตู้ หน้านี้อัปเดตเองเมื่อพนักงานสแกน
 
-- ภาพด้านข้างแสดงรถกับตู้ พร้อมจำนวนกล่องและน้ำหนักที่โหลดแล้ว
+- ภาพด้านข้างแสดงรถหัวลากกับตู้ 40 ฟุต สีน้ำเงินเติมเข้าไปในตู้ตามเปอร์เซ็นต์ที่โหลดแล้ว พร้อมจำนวนกล่องและน้ำหนัก
 - แถบใต้ภาพแยกความคืบหน้าตาม PO
 - การ์ด "กล่องถัดไป" บอก serial และตำแหน่งที่ต้องวางในตู้
 - ตารางด้านล่างเรียงกล่องตามลำดับโหลด จัดกลุ่มตาม PO
@@ -240,6 +240,23 @@ docs              flow ธุรกิจ, รูปแบบ Packing Plan, ด�
 | `node scripts/screenshots.mjs <url> <playwright> <chrome>` | ถ่ายภาพหน้าจอชุดนี้ใหม่ |
 
 หน้าจอทุกหน้าคุยกับข้อมูลผ่าน interface `WmsApi` ใน `apps/web/src/lib/api` ซึ่งมี 2 แบบ คือ Supabase และ Demo ถ้าแก้กติกาในฟังก์ชัน SQL ต้องแก้ Demo ทั้งฝั่งเว็บและ `apps/mobile/src/lib/demoApi.ts` ให้ตรงกัน
+
+### หน้าตาและฟอนต์
+
+- ฟอนต์ทั้งระบบคือ Kanit ฝังมากับแอป ไม่ต้องโหลดจาก Google Fonts จึงใช้ได้แม้เครื่องหน้างานออฟไลน์ เว็บใช้ `@fontsource/kanit` ส่วนแอป native ใช้ `@expo-google-fonts/kanit` ผ่าน `src/components/AppText.tsx` ในแอป native ให้ import `Text` และ `TextInput` จากไฟล์นี้แทน `react-native` เพื่อให้ความหนาตัวอักษรถูกต้องบน Android
+- สีและขนาดต่าง ๆ ประกาศไว้ใน `apps/web/src/app/globals.css` ตามตารางใน `docs/08-ux-v3-clean-saas.md`
+- ภาพรถบรรทุกเป็น SVG วาดในโค้ด (`apps/web/src/components/TruckFill.tsx`) ถ้าต้องการใช้รูปถ่ายรถจริงของบริษัท ให้วางไฟล์ที่ `apps/web/public/images/truck.jpg` แล้วตั้งค่า `TRUCK_PHOTO` ใน `apps/web/src/lib/truckPhoto.ts` โดยใส่ขนาดรูป และตำแหน่งตัวตู้ในรูปเป็นเปอร์เซ็นต์ ระบบจะเติมสีโหลดทับตัวตู้ในรูป การ์ดย่อยังใช้ภาพวาดเหมือนเดิม
+
+```ts
+export const TRUCK_PHOTO: TruckPhoto | null = {
+  src: '/images/truck.jpg',
+  width: 1600,
+  height: 900,
+  box: { left: 34, top: 22, width: 58, height: 48 }, // ตำแหน่งตัวตู้ในรูป (%)
+  fillFrom: 'left', // ฝั่งหัวรถ
+  credit: 'ภาพ: บริษัทของคุณ',
+};
+```
 
 ข้อจำกัดตอนนี้
 
