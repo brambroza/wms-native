@@ -8,7 +8,8 @@
 - `docs/03-architecture.md` — stack, monorepo, data model, API, container-fit
 - `docs/04-plan.md` — phase/sprint
 - `docs/05-recommendations.md`
-- `docs/07-ux-v2-autopilot.md` — **UX/UI v2 แนว AI Autopilot (ใช้แทน 02 สำหรับ web)**
+- `docs/07-ux-v2-autopilot.md` — แนวคิด AI Autopilot (agents, การตัดสินใจ, log)
+- `docs/08-ux-v3-clean-saas.md` — **หน้าตา UI ปัจจุบัน (v3 Clean SaaS) + design tokens**
 - `docs/06-packing-plan-format.md` — **รูปแบบ Packing Plan จริง: หน่วยหลักคือกล่อง (carton serial) ไม่ใช่พาเลท — มีผลเหนือ 01/03 เมื่อขัดกัน**
 
 ## Stack
